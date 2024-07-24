@@ -10,8 +10,7 @@ Resources:
       ImageId: ami-04a81a99f5ec58529
       InstanceType: t2.micro
       SecurityGroups:
-        - !Ref SSHSecurityGroup
-        - !Ref ServerSecurityGroup
+        - !Ref InstanceSecurityGroup
       KeyName: academykeypair
       UserData:
         Fn::Base64: !Sub |
@@ -58,24 +57,21 @@ Resources:
           sudo bash /root/wordpress-project/lemp-setup.sh
           check_exit_status "lemp-setup.sh script"
 
-  # our EC2 security group
-  SSHSecurityGroup:
+  # EC2 security group with ports 22, 80, and 443
+  InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: Enable SSH access via port 22
+      GroupDescription: Enable access via ports 22, 80, and 443
       SecurityGroupIngress:
-        - CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
           FromPort: 22
-          IpProtocol: tcp
           ToPort: 22
-
-  # our second EC2 security group
-  ServerSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: Enable accessing server via port 80
-      SecurityGroupIngress:
+          CidrIp: 0.0.0.0/0
         - IpProtocol: tcp
           FromPort: 80
           ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
           CidrIp: 0.0.0.0/0
