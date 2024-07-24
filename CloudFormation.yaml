@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: >-
-  CloudFormation template to create EC2 instance with security group
+  CloudFormation template to create EC2 instance with security group and static public IP
 
 Resources:
   MyInstance:
@@ -56,6 +56,17 @@ Resources:
           echo "Running lemp-setup.sh script..." | tee -a $LOG_FILE
           sudo bash /root/wordpress-project/lemp-setup.sh
           check_exit_status "lemp-setup.sh script"
+
+  # Elastic IP resource
+  MyElasticIP:
+    Type: AWS::EC2::EIP
+
+  # Elastic IP association with the instance
+  MyEIPAssociation:
+    Type: AWS::EC2::EIPAssociation
+    Properties:
+      InstanceId: !Ref MyInstance
+      EIP: !Ref MyElasticIP
 
   # EC2 security group with ports 22, 80, and 443
   InstanceSecurityGroup:
