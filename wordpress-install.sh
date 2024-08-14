@@ -18,7 +18,7 @@ sudo wget -O /var/www/html/wp-config.php https://keffin-bucket.s3.amazonaws.com/
 sudo chmod 640 /var/www/html/wp-config.php 
 sudo chown -R www-data:www-data /var/www/html/
 
-sed -i 's/password_here/$password/g' wp-config.php
+sed -i "s/password_here/$password/g" wp-config.php
 
 # sudo cd /etc/nginx/conf.d/
 # sudo touch wordpress.conf pull from s3bucket
