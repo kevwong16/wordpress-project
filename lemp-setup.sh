@@ -44,10 +44,30 @@ sudo mv /var/www/html/index.html /var/www/html/index.html.old
 sudo mv /root/wordpress-project/nginx.conf /etc/nginx/conf.d/nginx.conf
 
 # Define the DNS record for the WordPress site.
-dns_record="wp.kevwong.uk"
+my_domain="wp.kevwong.uk"
+
+elastic_ip=$(curl -s icanhazip.com)
+
+CF_API=
+CF_ZONE_ID=efe7e303d4cbb2728b1535ebb97acbd5
+
+curl --request POST \
+  --url https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/dns_records \
+  --header 'Content-Type: application/json' \
+  --header "Authorization: Bearer $CF_API" \
+  --data '{
+  "content": "$elastic_ip",
+  "name": "$my_domain",
+  "proxied": true,
+  "type": "A",
+  "comment": "Automatically adding A record",
+  "tags": [],
+  "ttl": 3600
+}'
+
 
 # Update the server name in the Nginx configuration file with the DNS record.
-sed -i "s/SERVERNAME/$dns_record/g" /etc/nginx/conf.d/nginx.conf
+sed -i "s/SERVERNAME/$my_domain/g" /etc/nginx/conf.d/nginx.conf
 
 # Test the Nginx configuration for syntax errors and reload Nginx if the test is successful.
 nginx -t && systemctl reload nginx
