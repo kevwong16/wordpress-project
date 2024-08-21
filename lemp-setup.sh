@@ -56,8 +56,8 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --header "Authorization: Bearer $CF_API" \
   --data '{
-  "content": "$elastic_ip",
-  "name": "$my_domain",
+  "content": "'"$elastic_ip"'",
+  "name": "'"$my_domain"'",
   "proxied": true,
   "type": "A",
   "comment": "Automatically adding A record",
