@@ -30,7 +30,7 @@ sudo php -v >> /root/testing.txt
 
 sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 512M/g' /etc/php/8.3/fpm/php.ini
 
-sed -i 's/post_max_size = 2M/post_max_size = 512M/g' /etc/php/8.3/fpm/php.ini
+sed -i 's/post_max_size = 8M/post_max_size = 512M/g' /etc/php/8.3/fpm/php.ini
 
 sudo systemctl restart php8.3-fpm
 
