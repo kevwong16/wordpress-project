@@ -28,6 +28,12 @@ sudo apt -y install php php-cli php-common php-imap php-fpm php-snmp php-xml php
 # Check the installed PHP version and append the output to /root/testing.txt.
 sudo php -v >> /root/testing.txt
 
+sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 512M/g' /etc/php/8.3/fpm/php.ini
+
+sed -i 's/post_max_size = 2M/post_max_size = 512M/g' /etc/php/8.3/fpm/php.ini
+
+systemctl restart php8.3-fpm
+
 # Stop the Apache web server since Nginx is being used.
 sudo systemctl stop apache2
 
