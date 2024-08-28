@@ -47,7 +47,7 @@ sudo systemctl disable apache2
 sudo mv /var/www/html/index.html /var/www/html/index.html.old
 
 # Replace the default Nginx configuration with a custom one for the WordPress project.
-sudo mv /root/wordpress-project/nginx.conf /etc/nginx/conf.d/nginx.conf
+sudo mv /home/ubuntu/wordpress-project/nginx.conf /etc/nginx/conf.d/nginx.conf
 
 # Define the DNS record for the WordPress site.
 my_domain=REPLACE_DOMAIN
