@@ -77,4 +77,4 @@ sed -i "s/SERVERNAME/$my_domain/g" /etc/nginx/conf.d/nginx.conf
 nginx -t && systemctl reload nginx
 
 # Run a script to install SSL certificates using Certbot.
-sudo bash /root/wordpress-project/certbot-ssl-install.sh
+# sudo bash /root/wordpress-project/certbot-ssl-install.sh
