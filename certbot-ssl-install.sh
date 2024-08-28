@@ -18,4 +18,4 @@ sudo certbot --nginx --non-interactive --agree-tos --email $EMAIL -d $DOMAIN
 sudo nginx -t && sudo systemctl reload nginx
 
 # Run the WordPress installation script
-sudo bash /root/wordpress-project/wordpress-install.sh
+# sudo bash /root/wordpress-project/wordpress-install.sh
