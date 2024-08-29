@@ -10,6 +10,7 @@ on:
  # CF_API: ${{ secrets.CF_API }}
  # CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
 
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -22,6 +23,7 @@ jobs:
       run: |
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key
         chmod 600 private_key
+
         ssh -i private_key -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.MY_ELASTIC_IP }} "echo 'SSH Connection Successful'"
 
     - name: Edit Script Variables
