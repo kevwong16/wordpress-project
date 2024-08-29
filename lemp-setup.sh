@@ -1,5 +1,8 @@
 #!/bin/bash
 
+sudo apt update -y
+sudo apt upgrade -y
+
 # Create an empty file /root/testing.txt to store the output of LEMP stack unit tests.
 sudo touch /root/testing.txt
 
